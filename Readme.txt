@@ -118,7 +118,7 @@
 　　iPartのテーブルで半径と中心角を指定できる。
 　　STLファイルの寸法は、半径-中心角、215halfは215/2。
 
-●引き上げ線ポイント PocketTrackPoint
+●引き上げ線ポイント PocketTrackPoint/
 ・PocketPoint_C.ipt、.stl
 　　ポイントレール部分の最終形状。プリント用。
 ・PocketPoint.ipt
@@ -136,6 +136,12 @@
 　　BarPinおよびレール側の穴をネジがスムーズに通る程度に調整。
 　　※5mmリーマ加工／2mmリーマ加工
 
+
+●高架橋脚 ViaductPillar/
+・VDPillar_A, VDPillar_B, vppillar_printasm.stl
+　　複線レール間隔にも対応した、高架レール向けの橋脚。橋脚に側壁が付いている。
+・StandardPillarCover　　※iam, stlは４個まとめて印刷用
+　　通常の橋脚に高架レールを乗せて出っ張った部分に、それらしいカバーを付ける。
 
 ●「大きな鉄橋」部品 TrussCC/
 ・思えば、もらってきた鉄橋でこの部品がないから、つくるか、とか
