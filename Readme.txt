@@ -64,6 +64,17 @@
 　ので、STLファイルと同名のiam (なければipt)から順次、要素を
 　たどるとわかりやすい。
 
+・出力の想定
+　　・FDM形式の３Ｄプリンタでの出力を想定して調整。
+　　　　スライス0.2mm、線幅0.4mmで調整
+　　・プリンタ側（スライサ側）のサポートは使用しないことを前提とし、
+　　　必要なら設計側でサポート材も設計に入れる
+　　　※サポート材の除去の手間など
+　　　※部品の下部の斜め面はサポート不要にするため
+　　・XYZPrinting社 daVinci superで検証。
+　　　一部は daVinci Pro 1.0で出力。
+
+
 
 ３．現時点で含まれている設計
 
@@ -141,9 +152,10 @@
 　testasmに、特殊長直線・カーブとの組み合わせ図。
 ・DoubleCross_SymWiden
 　Rturnを両側にして、かつ、特殊カーブと組み合わせて駅幅＝(1/2)Lにする例。
-　※プリント試作はしてない
+　※この設計法の特徴例示でプリント試作はしてない
 ・DoubleCross_DoubleSlant, DoubleCross_DoubleSlip
 　どちらもダブルスリップ的形状。png参照。
+　※この設計法の特徴例示でプリント試作はしてない
 
 ・DoubleCrossRail.iam / _C.ipt / TestAsm
 　上記レール群の試作検討用。
@@ -154,6 +166,59 @@
 　　ネジを入れる前に、BarとPinが抵抗なく回るようにBarの穴を調整。
 　　BarPinおよびレール側の穴をネジがスムーズに通る程度に調整。
 　　※5mmリーマ加工／2mmリーマ加工
+
+●片渡り クロスオーバー　シングルクロス　および高架化側壁　CrossOver/
+・片渡りポイント
+　および、このデータから派生した、単線複線ポイント　複線Ｓ字渡りカーブ
+・レール設計としては最終で、設計方針は一番洗練されている。
+
+・SingleCross.ipt
+　基本の設計ファイル。形状はすべてここで規定。
+　ベースとなるのは片渡りの半分を含む、単線複線型レール。
+
+・SingleCross_PointHalf.ipt / _MIR.ipt
+　SingleCrossのポイント側半分、およびそのミラー。
+・SingleCross_CurveHalf.ipt / _MIR.ipt
+　SingleCrossのカーブレール側半分、およびそのミラー。
+
+・SingleCrossIA.iam / _C.ipt / _C_MIR.ipt
+　PointHalf, CurveHalfを組み合わせて、iAssemblyによって
+　　・片渡り、シングルクロス
+　　・Ｓ字カーブ
+　　・単線複線ポイント（ジョイントのオスメスで２種）
+　をつくる。
+　STLの生成には、まずSingleCrossIAのテーブルで一種を選択し、
+　それを反映した _C.ipt もしくは _C_MIR.iptからSTLを出力する。
+・SingleCrossBar.ipt / _MIR.ipt
+　ポイントのトングに当たるバー。
+　ピンはDoubleCrossなどのものを流用。
+
+・SingleCrossIA_Cross(_MIR).stl
+　片渡りポイント STL
+・SingleCrossIA_Curve(_MIR).stl
+　Ｓ字渡り STL
+・SingleCrossIA_PointA(_MIR).stl
+　単線複線ポイントA型 STL
+
+・SingleCrossIA_MIR.iam
+　IA.iamのミラーにあたるアセンブリ。STLはIA.iamだけでつくれるが、
+　別のアセンブリに読み込みたい場合用。
+
+・ポイントの組み立て方はDoubleCrossと同じ。
+
+・RailVCoverST.ipt ST_S.ipt
+　直線レールを高架橋レール相当にするための外付けオプション側壁。
+　ST.iptが必要な形状を規定し、ST_S.iptではプリントするための
+　自前設計のサポート材を含んだ形状。
+　ST.iptのfxのLengthパラメータで全長が指定できる。
+　　（標準はレール長－連結部長さ＝橋脚の幅、高架レールと同じ形状）
+　はめ込んだ後、裏面のフックに必要なら適宜輪ゴムなど。
+
+・RailVCoverCV.ipt CV_S.ipt
+　同じく、単線複線ポイントのカーブ側の側壁。
+　ポイントの凸部を収納する構造。
+　※Ｓ字渡りにもそのまま使える。
+　組み合わせ方はpointtestasm参照。
 
 ●引き上げ線ポイント PocketTrackPoint/
 ・PocketPoint_C.ipt、.stl
