@@ -118,6 +118,43 @@
 　　iPartのテーブルで半径と中心角を指定できる。
 　　STLファイルの寸法は、半径-中心角、215halfは215/2。
 
+●ダブルクロス・シザースクロス　DoubleCross/
+・はじまりのレール。
+　それゆえ、設計は一番汚いので、整理された設計は 片渡りシリーズ Crossover参照
+・ストレートなダブルクロスと、渡り線をそのまま直進する形式の
+　ポイントを構成可能な派生品を組み合わせでつくる。
+
+・DoubleCross.ipt
+　ベースとなる設計。ここで線形をすべて決めている。
+　直進型の1/4のパーツと、斜め型の1/4のパーツをiPartで生成している。
+　※まず両者を含む形を作り、不要部をマスクして、マスクのオンオフで選択。
+・DoubleCross_Straight.iam / _C.ipt
+　一般的な複線の直進レール間のダブルクロス。
+・DoubleCrossBar.ipt / _MIR.ipt / Pin.ipt / Bar_printasm.iam
+　ポイントのトングにあたるバーの設計データ。
+　左右はあるが、直進・斜めとも同じバーを使うように設計してある。
+　Pinはバーの動作軸部品。
+　printasmは使いそうな部品のまとめ印刷セット。
+・DoubleCross_Rturn
+　「仙台市地下鉄東西線八木山動物公園駅型ダブルクロス」
+　駅のホームに行くところが斜め分岐。
+　testasmに、特殊長直線・カーブとの組み合わせ図。
+・DoubleCross_SymWiden
+　Rturnを両側にして、かつ、特殊カーブと組み合わせて駅幅＝(1/2)Lにする例。
+　※プリント試作はしてない
+・DoubleCross_DoubleSlant, DoubleCross_DoubleSlip
+　どちらもダブルスリップ的形状。png参照。
+
+・DoubleCrossRail.iam / _C.ipt / TestAsm
+　上記レール群の試作検討用。
+
+・組み立て方：
+　　Bar(_MIR)にBarPinを入れて、レール部分の穴に固定する。
+　　使用ネジ：M2ナット、M2x8mmネジ
+　　ネジを入れる前に、BarとPinが抵抗なく回るようにBarの穴を調整。
+　　BarPinおよびレール側の穴をネジがスムーズに通る程度に調整。
+　　※5mmリーマ加工／2mmリーマ加工
+
 ●引き上げ線ポイント PocketTrackPoint/
 ・PocketPoint_C.ipt、.stl
 　　ポイントレール部分の最終形状。プリント用。
