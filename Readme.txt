@@ -259,9 +259,57 @@
 ・Slope_testasm.iam
 　　直線レールと組み合わせた組み立て図。
 
-
 ※試作品なので、オスメスは１方向のみ
 ※iamのRailJointMale/Femaleをコンポーネント変更すればよい
+
+
+●ユニット式高架橋 ViaductPillarUnit/
+・標準の高架橋の高さ(以下、H)の1/2を基準として、高架橋を構成するユニット。
+・高架橋の脚部と、1/4長レールを含む高架橋のユニットからなり、標準市販品の高架レールと組み合わせて使う。
+・FDM式プリンタでプリントすることを想定して、サポート材を最初から適した形で設計に組み入れてある。
+・脚部ユニットは角が鋭く、ある程度丸めた方が良いが、斜め45度の面はFDMプリントのことを考慮した形なので、修正は要注意。
+
+・ViaductPillarUnit.ipt
+　　以下の高架ユニットの基本形状の設計ファイル。
+　　これを一度分割して、適宜組み合わせることで、必要な形状をつくる。
+　　意匠の修正はこのファイルで行えば良い。
+・ViaductPillarUnit_S.ipt
+　　高架ユニットのプリント用サポート材。
+　　それらしい形を作り、最後の「シェル」で薄肉化している。
+・ViaductPillarUnit.iam　_C.ipt
+　　無印と_Sを組み合わせたもの。
+
+・VPU_EdgeBottom.ipt, VPU_edgeTop.ipt, VPU_MiddleBottom.ipt, VPU_MiddleTop.ipt
+　　ViaductPillarUnit.iptを、端部・中間部を下部・上部に分割した物。
+　　これを組み合わせると単一線路の複数スパンの高架がつくれる。
+・VPU_SupportSingle.ipt
+　　ViaductPillarUnit_S.iptのサポートの端部を切り出してミラーして、１区間ようのサポート材としたもの。
+
+・ViaductPillarUnitIC.ipt, IC_S.ipt
+　　複線にするための、幅方向の連結ユニットおよびそのサポート材。
+・VPU_IC_Bottom, Top, SingleSupport.ipt
+　　下部、上部、サポート材
+
+
+・ViaductPillar_SingleSpan.iam _C.ipt
+　　脚ユニット：長さ1/4長、幅１線路用、高さ(1/2)H・1H
+　　テーブルでサポートの有無も含めて、切り替えて、_Cから、STL出力。
+・ViaductPillar_SingleSpan_C_1u.stl, 05u.stl
+　　STLにしたファイル。
+
+・ViaductPillar_SigleSpan_Doublelane.iam, _C.ipt
+　　長さ1/4長、複線用の脚ユニット。
+　　_C_05u.stl は(1/2)HのSTL（サポート込み）
+
+・Viaduct_HorizontalSingle.ipt, .iam, _C.ipt
+　　(1/4)Lの直線レール、側壁を含む、高架橋ユニット。高架直線・曲線レールと接続できる。
+　　基本設計は下記VPUSlopeと共通。
+
+
+●ユニット式高架橋 スロープユニットセット VPUSlope/
+・ユニット式高架橋の上部構造として、水平→登り傾斜、傾斜延長、登り傾斜→水平、の３ユニット。
+・
+
 
 ●高架橋脚 ViaductPillar/
 ・VDPillar_A, VDPillar_B, vppillar_printasm.stl
@@ -273,4 +321,7 @@
 ・思えば、もらってきた鉄橋でこの部品がないから、つくるか、とか
 　思ったのがすべての始まりだった気がする。
 
+●その他 Misc/
+・AsterMale.ipt / AsterMale_?.stl
+　　放射状になるレール。
 
